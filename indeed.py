@@ -32,10 +32,15 @@ def extract_indeed_pages():
 
 #indeed pages를 입력받아서 requests를 원하는 만큼 생성하는 함수 만들기 
 def extract_indeed_jobs(last_page):
-  #jobs = [] # 일자리 추출 후 저장 
-  for page in range(last_page):
-    result = requests.get(f"{URL}&start={page*LIMIT}") #페이지 요청 
-    print(result.status_code) # status_code는 requests에 포함된 것 > 페이지 개수만큼 200 출력
+  jobs = [] # 일자리 추출 후 저장 
+  #for page in range(last_page):
+  result = requests.get(f"{URL}&start={0*LIMIT}") #페이지 요청 
+  soup = BeautifulSoup(result.text, "html.parser") # 데이터를 html에서 추출
+  results = soup.find_all("div", {"class": "job_seen_beacon"})
+  for result in results:
+    title = result.find("h2", {"class": "jobTitle"}).find("span", title=True).text
+    print(title)
     
-    https://github.com/11dy/Web_Scrapper_with_Python.git
-
+  return jobs
+    
+   
