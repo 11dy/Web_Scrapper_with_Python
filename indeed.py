@@ -35,5 +35,7 @@ def extract_indeed_jobs(last_page):
   #jobs = [] # 일자리 추출 후 저장 
   for page in range(last_page):
     result = requests.get(f"{URL}&start={page*LIMIT}") #페이지 요청 
-    print(result.status_code) # status_code는 requests에 포함된 것 > 페이지 개수만큼 200 출력 
+    print(result.status_code) # status_code는 requests에 포함된 것 > 페이지 개수만큼 200 출력
+    
+    https://github.com/11dy/Web_Scrapper_with_Python.git
 
