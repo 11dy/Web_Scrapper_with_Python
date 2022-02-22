@@ -36,11 +36,19 @@ def extract_indeed_jobs(last_page):
   #for page in range(last_page):
   result = requests.get(f"{URL}&start={0*LIMIT}") #페이지 요청 
   soup = BeautifulSoup(result.text, "html.parser") # 데이터를 html에서 추출
-  results = soup.find_all("div", {"class": "job_seen_beacon"})
+  results = soup.find_all("a", {"class":"fs-unmask"})
   for result in results:
-    title = result.find("h2", {"class": "jobTitle"}).find("span", title=True).text
-    print(title)
-    
+    #title = result.find("h2", {"class": "jobTitle"}).find("span", title=True).text
+    company = result.find("span", {"class" : "companyName"})
+    # 여기서 company는 soup이다 
+    company_anchor = company.find("a")
+    if company_anchor is not None:
+     company = str(company_anchor.string)# 기존의 soup을 없애고 string을 넣어줌 
+    else:
+     company = str(company.string)
+    company = company.strip() 
+    print(company)
   return jobs
-    
-   
+
+#출력의 빈칸을 없애려면 strip을 사용해줘야한다. strip은 해당 문자열의 ()안 내용을 모두 삭제해준다. strip()은 양 옆 빈칸 삭제 
+

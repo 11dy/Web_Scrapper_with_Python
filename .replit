@@ -1,2 +1,2 @@
 language = "python3"
-run = "go"
+run = "python main.py"
