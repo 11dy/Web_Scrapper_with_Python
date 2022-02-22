@@ -38,7 +38,7 @@ def extract_indeed_jobs(last_page):
   soup = BeautifulSoup(result.text, "html.parser") # 데이터를 html에서 추출
   results = soup.find_all("a", {"class":"fs-unmask"})
   for result in results:
-    #title = result.find("h2", {"class": "jobTitle"}).find("span", title=True).text
+    title = result.find("h2", {"class": "jobTitle"}).find("span", title=True).text
     company = result.find("span", {"class" : "companyName"})
     # 여기서 company는 soup이다 
     company_anchor = company.find("a")
@@ -47,7 +47,7 @@ def extract_indeed_jobs(last_page):
     else:
      company = str(company.string)
     company = company.strip() 
-    print(company)
+    print(title, company)
   return jobs
 
 #출력의 빈칸을 없애려면 strip을 사용해줘야한다. strip은 해당 문자열의 ()안 내용을 모두 삭제해준다. strip()은 양 옆 빈칸 삭제 
